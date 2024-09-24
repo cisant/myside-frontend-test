@@ -8,9 +8,22 @@ import { Product } from "./types";
 import { Column } from "@/app/components/molecules/table/types";
 import { ROWS_PER_PAGE } from "@/app/utils/constants";
 import { SearchBar } from "@/app/components/molecules/searchbar";
+import { Dropdown } from "@/app/components/molecules/dropdown";
+import { useCategory } from "@/app/hooks/useCategory";
 
 export default function ProductListPage() {
-  const { products, page, setPage, handleSearch } = useProduct();
+  const {
+    products,
+    page,
+    setPage,
+    handleSearch,
+    loading: isLoadingProducts,
+  } = useProduct();
+  const {
+    categories,
+    handleCategoryChange,
+    loading: isLoadingCategories,
+  } = useCategory();
 
   const columns: Column<Product>[] = [
     { key: "id", header: "ID" },
@@ -29,14 +42,23 @@ export default function ProductListPage() {
   return (
     <div>
       <h1>Products List</h1>
+      {!isLoadingCategories && (
+        <Dropdown
+          options={categories}
+          onChange={handleCategoryChange}
+          label="Filter by Category"
+        />
+      )}
       <SearchBar onSearch={handleSearch} />
-      <Table
-        currentPage={page}
-        setCurrentPage={setPage}
-        data={products}
-        columns={columns}
-        rowsPerPage={ROWS_PER_PAGE}
-      />
+      {!isLoadingProducts && (
+        <Table
+          currentPage={page}
+          setCurrentPage={setPage}
+          data={products}
+          columns={columns}
+          rowsPerPage={ROWS_PER_PAGE}
+        />
+      )}
     </div>
   );
 }
