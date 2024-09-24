@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { Button } from "@/app/components/atoms/Button/Button";
+import { Button } from "@/app/components/atoms/Buttons/Button";
 import {
   ProductContainer,
   ProductHeader,
