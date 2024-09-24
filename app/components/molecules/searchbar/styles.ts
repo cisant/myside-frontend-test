@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../atoms/button";
+import { Button } from "../../atoms/button/Button";
 
 export const SearchBarWrapper = styled.div`
   margin-bottom: 20px;

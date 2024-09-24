@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../atoms/button";
+import { Button } from "../../atoms/button/Button";
 import { TableCell } from "../../atoms/table-cell";
 import { TableHeader } from "../../atoms/table-header";
 import { TableRow } from "../../atoms/table-row";
