@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../services/product";
+import { fetchProducts, getProduct } from "../services/product";
 import { Product } from "../(pages)/products/list/types";
 import { ROWS_PER_PAGE } from "../utils/constants";
+import { useRouter } from "next/navigation";
+import { frontEndRoutes } from "../config/frontEndRoutes";
 
-export const useProduct = (selectedCategory: string | undefined) => {
+export const useProduct = (selectedCategory?: string) => {
+  const router = useRouter();
   const [page, setPage] = useState<number>(1);
   const [products, setProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Product>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,6 +29,26 @@ export const useProduct = (selectedCategory: string | undefined) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const getProductDetails = async (productId: number) => {
+    try {
+      const { product } = await getProduct(productId);
+      setProduct(product);
+    } catch (error) {
+      console.error(error);
+      setError("Failed to get product details.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const backToProductList = () => {
+    router.push(frontEndRoutes.product.list());
+  };
+
+  const handleRowClick = (product: Product) => {
+    router.push(frontEndRoutes.product.view(product.id));
   };
 
   useEffect(() => {
@@ -50,5 +74,16 @@ export const useProduct = (selectedCategory: string | undefined) => {
     );
   };
 
-  return { products, loading, error, page, setPage, handleSearch };
+  return {
+    products,
+    product,
+    loading,
+    error,
+    page,
+    setPage,
+    handleSearch,
+    handleRowClick,
+    getProductDetails,
+    backToProductList,
+  };
 };

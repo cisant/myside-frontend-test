@@ -11,6 +11,7 @@ export const Table = <T,>({
   columns,
   currentPage,
   setCurrentPage,
+  onRowClick,
 }: TableProps<T>) => {
   const handleNext = () => {
     setCurrentPage((prev: number) => prev + 1);
@@ -32,7 +33,11 @@ export const Table = <T,>({
         </thead>
         <tbody>
           {data.map((row, rowIndex) => (
-            <TableRow key={rowIndex}>
+            <TableRow
+              onClick={() => onRowClick && onRowClick(row)}
+              style={{ cursor: onRowClick ? "pointer" : "default" }}
+              key={rowIndex}
+            >
               {columns.map((column, colIndex) => (
                 <TableCell key={colIndex}>
                   {column.render

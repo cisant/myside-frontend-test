@@ -24,3 +24,13 @@ export const fetchProducts = async (
     throw error;
   }
 };
+
+export const getProduct = async (productId: number) => {
+  try {
+    const response = await axios.get(`${API_URL}/products/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching single product:", error);
+    throw error;
+  }
+};

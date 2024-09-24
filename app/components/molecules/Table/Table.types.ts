@@ -12,4 +12,5 @@ export interface TableProps<T> {
   rowsPerPage?: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  onRowClick?: (row: T) => void;
 }

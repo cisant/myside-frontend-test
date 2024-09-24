@@ -24,6 +24,7 @@ export default function ProductListPage() {
     page,
     setPage,
     handleSearch,
+    handleRowClick,
     loading: isLoadingProducts,
   } = useProduct(selectedCategory);
 
@@ -69,6 +70,7 @@ export default function ProductListPage() {
           data={products}
           columns={columns}
           rowsPerPage={ROWS_PER_PAGE}
+          onRowClick={handleRowClick}
         />
       )}
     </div>
