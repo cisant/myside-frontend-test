@@ -7,7 +7,7 @@ export const SearchBarWrapper = styled.div`
 
 export const SearchContainer = styled.div`
   display: flex;
-  align-items: center;
+  gap: 10px;
 `;
 
 export const SearchBarButton = styled(Button)`

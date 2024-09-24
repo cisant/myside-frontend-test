@@ -1,6 +1,6 @@
 import React from "react";
 import { Label } from "../../atoms/label";
-import { DropdownContainer } from "./styles";
+import { DropdownContainer, DropdownWrapper } from "./styles";
 import { Option } from "../../atoms/option";
 
 interface DropdownProps {
@@ -15,7 +15,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   label,
 }) => {
   return (
-    <div>
+    <DropdownWrapper>
       {label && <Label>{label}</Label>}
       <DropdownContainer onChange={(e) => onChange(e.target.value)}>
         {options.map((option) => (
@@ -24,6 +24,6 @@ export const Dropdown: React.FC<DropdownProps> = ({
           </Option>
         ))}
       </DropdownContainer>
-    </div>
+    </DropdownWrapper>
   );
 };
