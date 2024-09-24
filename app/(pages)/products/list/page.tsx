@@ -7,9 +7,10 @@ import { useProduct } from "@/app/hooks/useProduct";
 import { Product } from "./types";
 import { Column } from "@/app/components/molecules/table/types";
 import { ROWS_PER_PAGE } from "@/app/utils/constants";
+import { SearchBar } from "@/app/components/molecules/searchbar";
 
 export default function ProductListPage() {
-  const { products, page, setPage } = useProduct();
+  const { products, page, setPage, handleSearch } = useProduct();
 
   const columns: Column<Product>[] = [
     { key: "id", header: "ID" },
@@ -28,6 +29,7 @@ export default function ProductListPage() {
   return (
     <div>
       <h1>Products List</h1>
+      <SearchBar onSearch={handleSearch} />
       <Table
         currentPage={page}
         setCurrentPage={setPage}

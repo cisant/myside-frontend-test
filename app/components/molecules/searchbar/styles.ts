@@ -14,3 +14,9 @@ export const SearchBarButton = styled(Button)`
   margin-left: 8px;
   padding: 8px 16px;
 `;
+
+export const ClearButton = styled(Button)`
+  background-color: blue;
+  margin-left: 8px;
+  padding: 8px 16px;
+`;

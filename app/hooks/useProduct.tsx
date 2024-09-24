@@ -9,21 +9,33 @@ export const useProduct = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const productsData = await fetchProducts(page, ROWS_PER_PAGE);
-        setProducts(productsData);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to fetch products.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getProducts = async (currentPage: number) => {
+    try {
+      const productsData = await fetchProducts(currentPage, ROWS_PER_PAGE);
+      setProducts(productsData);
+    } catch (error) {
+      console.error(error);
+      setError("Failed to fetch products.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    getProducts();
+  useEffect(() => {
+    getProducts(page);
   }, [page]);
 
-  return { products, loading, error, page, setPage };
+  const handleSearch = async (query: string) => {
+    if (query === "") {
+      await getProducts(0);
+      return;
+    }
+    setProducts(
+      products.filter((product) =>
+        product.title.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+  };
+
+  return { products, loading, error, page, setPage, handleSearch };
 };

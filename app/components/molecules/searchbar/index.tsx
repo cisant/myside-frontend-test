@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Input } from "../../atoms/input";
 import { Label } from "../../atoms/label";
-import { SearchBarButton, SearchBarWrapper, SearchContainer } from "./styles";
+import {
+  ClearButton,
+  SearchBarButton,
+  SearchBarWrapper,
+  SearchContainer,
+} from "./styles";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -12,6 +17,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   const handleSearch = () => {
     onSearch(query);
+  };
+
+  const clearFilter = () => {
+    setQuery("");
   };
 
   return (
@@ -26,6 +35,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           placeholder="Search..."
         />
         <SearchBarButton onClick={handleSearch}>Search</SearchBarButton>
+        {query !== "" && <ClearButton onClick={clearFilter}>Clear</ClearButton>}
       </SearchContainer>
     </SearchBarWrapper>
   );
