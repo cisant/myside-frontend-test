@@ -4,15 +4,15 @@ import { Product } from "../(pages)/products/list/types";
 import { ROWS_PER_PAGE } from "../utils/constants";
 
 export const useProduct = () => {
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const getProducts = async (currentPage: number) => {
     try {
-      const productsData = await fetchProducts(currentPage, ROWS_PER_PAGE);
-      setProducts(productsData);
+      const { products } = await fetchProducts(currentPage, ROWS_PER_PAGE);
+      setProducts(products);
     } catch (error) {
       console.error(error);
       setError("Failed to fetch products.");
