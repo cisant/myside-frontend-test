@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "../../atoms/button/Button";
+import { Button } from "../../atoms/Button/Button";
 import { TableCell } from "../../atoms/table-cell";
 import { TableHeader } from "../../atoms/table-header";
 import { TableRow } from "../../atoms/table-row";
-import { StyledTable, PaginationWrapper } from "./styles";
-import { TableProps } from "./types";
+import { StyledTable, PaginationWrapper } from "./Table.styles";
+import { TableProps } from "./Table.types";
 
 export const Table = <T,>({
   data,

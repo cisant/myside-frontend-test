@@ -2,15 +2,15 @@
 
 import React from "react";
 import Image from "next/image";
-import { Table } from "@/app/components/molecules/table";
 import { useProduct } from "@/app/hooks/useProduct";
 import { Product } from "./types";
-import { Column } from "@/app/components/molecules/table/types";
 import { ROWS_PER_PAGE } from "@/app/utils/constants";
 import { SearchBar } from "@/app/components/molecules/searchbar";
-import { Dropdown } from "@/app/components/molecules/dropdown";
 import { useCategory } from "@/app/hooks/useCategory";
 import { SearchSection } from "./styles";
+import { Column } from "@/app/components/molecules/Table/Table.types";
+import { Dropdown } from "@/app/components/molecules/Dropdown/Dropdown";
+import { Table } from "@/app/components/molecules/Table/Table";
 
 export default function ProductListPage() {
   const {

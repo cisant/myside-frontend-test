@@ -1,7 +1,7 @@
 import React from "react";
 import { Label } from "../../atoms/label";
-import { DropdownContainer, DropdownWrapper } from "./styles";
 import { Option } from "../../atoms/option";
+import { DropdownWrapper, DropdownContainer } from "./Dropdown.styles";
 
 interface DropdownProps {
   options: { label: string; value: string }[];
