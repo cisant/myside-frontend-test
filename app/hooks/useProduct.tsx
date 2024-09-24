@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../services/product";
 import { Product } from "../(pages)/products/list/types";
+import { ROWS_PER_PAGE } from "../utils/constants";
 
 export const useProduct = () => {
+  const [page, setPage] = useState<number>(0);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -10,7 +12,7 @@ export const useProduct = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const productsData = await fetchProducts();
+        const productsData = await fetchProducts(page, ROWS_PER_PAGE);
         setProducts(productsData);
       } catch (error) {
         console.error(error);
@@ -21,7 +23,7 @@ export const useProduct = () => {
     };
 
     getProducts();
-  }, []);
+  }, [page]);
 
-  return { products, loading, error };
+  return { products, loading, error, page, setPage };
 };

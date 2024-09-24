@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "../../atoms/button";
 import { TableCell } from "../../atoms/table-cell";
 import { TableHeader } from "../../atoms/table-header";
@@ -10,17 +10,15 @@ export const Table = <T,>({
   data,
   columns,
   rowsPerPage = 5,
+  currentPage,
+  setCurrentPage,
 }: TableProps<T>) => {
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const totalPages = Math.ceil(data.length / rowsPerPage);
-
   const handleNext = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
+    setCurrentPage((prev: number) => prev + 1);
   };
 
   const handlePrev = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 0));
+    setCurrentPage((prev: number) => Math.max(prev - 1, 0));
   };
 
   const startIndex = currentPage * rowsPerPage;
@@ -55,9 +53,9 @@ export const Table = <T,>({
           Previous
         </Button>
         <span>
-          Page {currentPage + 1} of {totalPages}
+          Page {currentPage + 1}
         </span>
-        <Button onClick={handleNext} disabled={currentPage === totalPages - 1}>
+        <Button onClick={handleNext}>
           Next
         </Button>
       </PaginationWrapper>

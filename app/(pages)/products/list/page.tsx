@@ -5,11 +5,11 @@ import Image from "next/image";
 import { Table } from "@/app/components/molecules/table";
 import { useProduct } from "@/app/hooks/useProduct";
 import { Product } from "./types";
-import { ROWS_PER_PAGE } from "@/app/utils/constants";
 import { Column } from "@/app/components/molecules/table/types";
+import { ROWS_PER_PAGE } from "@/app/utils/constants";
 
 export default function ProductListPage() {
-  const { products } = useProduct();
+  const { products, page, setPage } = useProduct();
 
   const columns: Column<Product>[] = [
     { key: "id", header: "ID" },
@@ -28,7 +28,13 @@ export default function ProductListPage() {
   return (
     <div>
       <h1>Products List</h1>
-      <Table data={products} columns={columns} rowsPerPage={ROWS_PER_PAGE} />
+      <Table
+        currentPage={page}
+        setCurrentPage={setPage}
+        data={products}
+        columns={columns}
+        rowsPerPage={ROWS_PER_PAGE}
+      />
     </div>
   );
 }

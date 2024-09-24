@@ -1,2 +1,2 @@
-export const API_URL = "https://fakestoreapi.com/products";
-export const ROWS_PER_PAGE = 5;
+export const API_URL = "https://fakestoreapi.com";
+export const ROWS_PER_PAGE = 10;
