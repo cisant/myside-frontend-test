@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../services/category";
 import { arrayToOptions } from "../utils/array-to-options";

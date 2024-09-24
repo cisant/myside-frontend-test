@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../services/product";
 import { Product } from "../(pages)/products/list/types";

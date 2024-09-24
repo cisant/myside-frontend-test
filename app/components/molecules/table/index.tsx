@@ -9,7 +9,6 @@ import { TableProps } from "./types";
 export const Table = <T,>({
   data,
   columns,
-  rowsPerPage = 5,
   currentPage,
   setCurrentPage,
 }: TableProps<T>) => {
@@ -20,9 +19,6 @@ export const Table = <T,>({
   const handlePrev = () => {
     setCurrentPage((prev: number) => Math.max(prev - 1, 0));
   };
-
-  const startIndex = currentPage * rowsPerPage;
-  const currentData = data.slice(startIndex, startIndex + rowsPerPage);
 
   return (
     <div>
@@ -35,7 +31,7 @@ export const Table = <T,>({
           </TableRow>
         </thead>
         <tbody>
-          {currentData.map((row, rowIndex) => (
+          {data.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               {columns.map((column, colIndex) => (
                 <TableCell key={colIndex}>
@@ -49,15 +45,11 @@ export const Table = <T,>({
         </tbody>
       </StyledTable>
       <PaginationWrapper>
-        <Button onClick={handlePrev} disabled={currentPage === 0}>
+        <Button onClick={handlePrev} disabled={currentPage === 1}>
           Previous
         </Button>
-        <span>
-          Page {currentPage + 1}
-        </span>
-        <Button onClick={handleNext}>
-          Next
-        </Button>
+        <span>Page {currentPage}</span>
+        <Button onClick={handleNext}>Next</Button>
       </PaginationWrapper>
     </div>
   );
