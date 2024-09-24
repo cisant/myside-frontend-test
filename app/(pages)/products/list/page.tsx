@@ -14,17 +14,18 @@ import { SearchSection } from "./styles";
 
 export default function ProductListPage() {
   const {
+    categories,
+    handleCategoryChange,
+    selectedCategory,
+    loading: isLoadingCategories,
+  } = useCategory();
+  const {
     products,
     page,
     setPage,
     handleSearch,
     loading: isLoadingProducts,
-  } = useProduct();
-  const {
-    categories,
-    handleCategoryChange,
-    loading: isLoadingCategories,
-  } = useCategory();
+  } = useProduct(selectedCategory);
 
   const columns: Column<Product>[] = [
     { key: "id", header: "ID" },

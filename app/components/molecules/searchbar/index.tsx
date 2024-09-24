@@ -25,7 +25,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   return (
     <SearchBarWrapper>
-      <Label htmlFor="search">Search Products</Label>
+      <Label htmlFor="search">Search Products by Title</Label>
       <SearchContainer>
         <Input
           type="text"

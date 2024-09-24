@@ -1,11 +1,23 @@
 import { API_URL } from "@/app/utils/constants";
 import axios from "axios";
 
-export const fetchProducts = async (page: number, itemsPerPage: number) => {
+export const fetchProducts = async (
+  page: number,
+  itemsPerPage: number,
+  selectedCategory?: string
+) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/products?page=${page}&limit=${itemsPerPage}`
-    );
+    let url = `${API_URL}/products`;
+
+    if (selectedCategory) {
+      url += `/category?type=${selectedCategory}&`;
+    } else {
+      url += `?`;
+    }
+
+    url += `page=${page}&limit=${itemsPerPage}`;
+
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     console.error("Error fetching products:", error);

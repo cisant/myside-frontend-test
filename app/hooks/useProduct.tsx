@@ -5,7 +5,7 @@ import { fetchProducts } from "../services/product";
 import { Product } from "../(pages)/products/list/types";
 import { ROWS_PER_PAGE } from "../utils/constants";
 
-export const useProduct = () => {
+export const useProduct = (selectedCategory: string | undefined) => {
   const [page, setPage] = useState<number>(1);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,11 @@ export const useProduct = () => {
 
   const getProducts = async (currentPage: number) => {
     try {
-      const { products } = await fetchProducts(currentPage, ROWS_PER_PAGE);
+      const { products } = await fetchProducts(
+        currentPage,
+        ROWS_PER_PAGE,
+        selectedCategory
+      );
       setProducts(products);
     } catch (error) {
       console.error(error);
@@ -25,11 +29,18 @@ export const useProduct = () => {
 
   useEffect(() => {
     getProducts(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
+  useEffect(() => {
+    getProducts(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory]);
+
+  // TODO: Improve this by sending the param to backend
   const handleSearch = async (query: string) => {
     if (query === "") {
-      await getProducts(0);
+      await getProducts(1);
       return;
     }
     setProducts(
